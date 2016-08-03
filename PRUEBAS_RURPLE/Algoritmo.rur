@@ -1,3 +1,8 @@
+moved_front = 0
+turned_left = 0
+turned_rigth =0
+def turn_around():
+    repeat(turn_left,2)
 def turn_rigth():
     repeat(turn_left,3)
 def return_here():
@@ -10,10 +15,24 @@ def inicializate():
             pick_beeper()
         else:
             move()
+def test():
+    if  not left_is_clear() and not right_is_clear() and front_is_clear():
+        move()
+        print "avanzo"
+    elif left_is_clear() and not right_is_clear() and not front_is_clear():
+        turn_left()
+        move()
+        print "giro a la izquierda"
+    elif not left_is_clear() and right_is_clear() and not front_is_clear():
+        turn_rigth()
+        move()
+        print "giro a la derecha"
+    elif not left_is_clear() and not right_is_clear() and not front_is_clear():
+        turn_around()
+        move()
+    else:
+        move()
+        print "mo se que hacer"
 inicializate()
-move()
-move()
-return_here()
-turn_rigth()
-move()
+repeat(test,100)
 turn_off()
