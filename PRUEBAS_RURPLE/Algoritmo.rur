@@ -1,0 +1,19 @@
+def turn_rigth():
+    repeat(turn_left,3)
+def return_here():
+    put_beeper()
+    put_beeper()
+    put_beeper()
+def inicializate():
+    while(on_beeper()):
+        if on_beeper():
+            pick_beeper()
+        else:
+            move()
+inicializate()
+move()
+move()
+return_here()
+turn_rigth()
+move()
+turn_off()
