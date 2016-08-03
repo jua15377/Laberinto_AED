@@ -18,18 +18,22 @@ def inicializate():
             pick_beeper()
         else:
             move()
+def poner_beeper(): 
+    turn_around()
+    move()
+    put_beeper()
+    turn_around()
+    move()
 
-def migaja():
-    if on_beeper():
+def trackeo(): 
         turn_around()
         move()
-        turn_rigth()
+        turn_left()
         move()
-        migaja()
-    
     
 def test():
-    migaja()
+    while on_beeper():
+        trackeo()
     if  not left_is_clear() and not right_is_clear() and front_is_clear():
         move()
         print "avanzo"
@@ -42,13 +46,16 @@ def test():
         move()
         print "giro a la derecha"
     elif not left_is_clear() and not right_is_clear() and not front_is_clear():
-        put_beeper()
         turn_around()
-        move()
+        move()
+    elif left_is_clear() and right_is_clear() and not front_is_clear():
+        turn_rigth()
+        move()
+        
     else:
-        put_beeper()
+        poner_beeper()
         move()
-        print "mo se que hacer"
+        print "no se que hacer"
 inicializate()
 repeat(test,100)
 turn_off()
