@@ -35,19 +35,19 @@ while (1){
       drive_goto(20,20);
       drive_goto(52,-50);   
       }
-    if(ping_cm(8)<7 && irLeft == 1 && irRight == 1){  //gira hacia la derecha cuando la izquierda y adelante estan bloqueados
+    else if(ping_cm(8)<7 && irLeft == 1 && irRight == 1){  //gira hacia la derecha cuando la izquierda y adelante estan bloqueados
       drive_goto(20,20);
       drive_goto(25,-26); 
       }
-    if(ping_cm(8)<7 && irLeft == 1 && irRight == 0){  //gira hacia la izquierda cuando la derecha y adelante estan bloqueados
+    else if(ping_cm(8)<7 && irLeft == 1 && irRight == 0){  //gira hacia la izquierda cuando la derecha y adelante estan bloqueados
       drive_goto(20,20);
       drive_goto(-25,26); 
       }
-    if(ping_cm(8)<7 && irLeft == 0 && irRight == 1){  //gira hacia la izquierda cuando la derecha y adelante estan bloqueados
+    else if(ping_cm(8)<7 && irLeft == 0 && irRight == 1){  //gira hacia la izquierda cuando la derecha y adelante estan bloqueados
       drive_goto(20,20);
       drive_goto(25,-26); 
       } 
-    if (ping_cm(8)>7){
+    else if (ping_cm(8)>7){
     drive_rampStep(30,30); 
       
       }
@@ -56,8 +56,4 @@ while (1){
   } 
   
   
-}                                  
-
-  
-
-
+}
