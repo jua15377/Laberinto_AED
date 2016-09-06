@@ -13,7 +13,7 @@
 #include<stdlib.h>
 
 int L = 0;
-int D = 0; 
+int R = 0; 
 int frente = 0;
 int cont = 0; 
 int irLeft, irRight; 
@@ -23,7 +23,7 @@ int irLeft, irRight;
 
 /* Stack has three properties. capacity stands for the maximum number of elements stack can hold.
    Size stands for the current size of the stack and elements is the array of elements */
-typedef struct Stack
+typedef struct Stack 
 {
         int capacity;
         int size;
@@ -109,10 +109,10 @@ void cheking(){
     
     
   if(irRight == 0){
-    D = 0; 
+    R = 1; 
     }
   else {
-    D = 0;
+    R = 0;
     }
     
     
@@ -124,6 +124,51 @@ void cheking(){
     }
   
   }
+  
+/*---------Funcion que hace los push, dependiendo de lo que encuentre en el camino*/
+void result(Stack *stackR,Stack *stackL,Stack *stackRoad){
+  int resultado = 0; 
+  resultado = L + R + frente; 
+  
+  /*Si existe una bifurcacion*/
+  if(resultado > 1){
+    push(stackL, L);
+    if (frente == 0){
+      push(stackRoad, cont); 
+      cont = 0; 
+      push(stackRoad, cont); 
+      push(stackRoad, -2);
+      
+      push(stackR, 0);
+      
+      }
+    else{
+      push(stackRoad, cont); 
+      cont = 0; 
+      push(stackRoad, cont); 
+      
+      push(stackR, R);
+      }
+    }
+    if(frente == 0 && resultado == 1){
+      if(L == 1){
+        push(stackRoad, cont); 
+        push(stackRoad,-1); 
+        cont = 0; 
+        }
+      if(R == 1){
+        push(stackRoad,cont);
+        push(stackRoad,-2);
+        cont = 0;
+        }
+      }
+    if(resultado == 0){
+      push(stackRoad,cont);
+      push(stackRoad,-2);
+      cont = 0;
+      }
+  }
+
 
 
 int main() {
