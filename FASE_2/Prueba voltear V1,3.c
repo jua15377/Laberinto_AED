@@ -107,7 +107,7 @@ void paso(){
 /*-----------------------------------------------------------------------------*/
 /*Funcion que revisa los lados y frente del robot para tomar datos del entorno*/
 /*-----------------------------------------------------------------------------*/
-void cheking(){
+void checking(){
   low(26);
   low(27);
   
@@ -211,7 +211,8 @@ void backtracking(Stack *stackR, Stack *stackL, Stack *stackRoad){
       izquierda();
       }
     }
-    checkStacks(Stack *stackR, Stack *stackL, Stack *stackRoad);
+  checkStacks(stackR,stackL,stackRoad);
+  
   
   }
 /*------------------------------------------------------------------------------------------*/
@@ -224,11 +225,12 @@ void checkStacks(Stack *stackR, Stack *stackL, Stack *stackRoad){
     push(stackRoad,-2);
     paso(); /*PASO()*/
     }
-  if(top(stackR)==0&&top(stackL)==1{
+  if(top(stackR)==0&&top(stackL)==1){
     pop(stackRoad);
     izquierda();
-    push(stackRoad,-1);
-    paso();/*PASO()*/
+    push(stackRoad, -1);
+    paso();
+    
     }
   if(top(stackR)==1&&top(stackL)==1){
     pop(stackR);
@@ -260,7 +262,7 @@ while (1){
     freqout(1, 1, 38000);
     irRight = input(2);
     
-    revisar();
+    checking();
     result(stackR, stackL, stackRoad);
     
     if(frente ==1){
