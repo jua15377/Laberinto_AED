@@ -164,12 +164,36 @@ void result(Stack *stackR,Stack *stackL,Stack *stackRoad){
       }
     if(resultado == 0){
       push(stackRoad,cont);
-      push(stackRoad,-2);
       cont = 0;
+      backtracking(stackR, stackL, stackRoad);
       }
   }
 
-
+void backtracking(Stack *stackR, Stack *stackL, Stack *stackRoad){
+  int valor = 0; 
+  while(top(stackRoad)!= 0 ){
+    if(top(stackRoad)>0){
+      valor = top(stackRoad);
+      pop(stackRoad);
+      valor = valor*(-1);
+      drive_goto(valor,valor);
+      }
+    if(top(stackRoad)==-1){
+      pop(stackRoad);
+      drive_goto(26,-25);
+      }
+    if(top(stackRoad)==-2){
+      pop(stackRoad);
+      drive_goto(-25,26);
+      }
+    }
+  checkStacks(Stack *stackR, Stack *stackL, Stack *stackRoad);
+  
+  }
+  
+void checkStacks(Stack *stackR, Stack *stackL, Stack *stackRoad){
+  
+  }
 
 int main() {
   
