@@ -12,6 +12,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+int L = 0;
+int D = 0; 
+int frente = 0;
+int cont = 0; 
+int irLeft, irRight; 
+
+
+
+
 /* Stack has three properties. capacity stands for the maximum number of elements stack can hold.
    Size stands for the current size of the stack and elements is the array of elements */
 typedef struct Stack
@@ -78,6 +87,45 @@ void push(Stack *S,int element)
 /*Codigo para manejo de Stacks*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
+
+void cheking(){
+  low(26);
+  low(27);
+  
+  
+  freqout(11, 1, 38000);                      // Check left & right objects. Codigo tomado de 
+  irLeft = input(10);                         //learn.parallax.com/tutorials/robot/activitybot/activitybot/navigate-infrared-flashlights/roaming-infrared-flashlights
+
+  freqout(1, 1, 38000);
+  irRight = input(2);
+  
+  
+  if(irLeft == 0){
+    L = 1;
+    }
+  else{
+    L = 0;
+    }
+    
+    
+  if(irRight == 0){
+    D = 0; 
+    }
+  else {
+    D = 0;
+    }
+    
+    
+  if(ping_cm(8)>15){
+    frente = 1;
+    }
+  else{
+    frente = 0;
+    }
+  
+  }
+
+
 int main() {
   
 
@@ -85,14 +133,16 @@ int main() {
   
   low(26);
   low(27); 
+
+
   
 
 
 while (1){
-    freqout(11, 1, 65000);                      // Check left & right objects. Codigo tomado de 
+    freqout(11, 1, 38000);                      // Check left & right objects. Codigo tomado de 
     irLeft = input(10);                         //learn.parallax.com/tutorials/robot/activitybot/activitybot/navigate-infrared-flashlights/roaming-infrared-flashlights
 
-    freqout(1, 1, 65000);
+    freqout(1, 1, 38000);
     irRight = input(2);
  
   
