@@ -2,9 +2,6 @@
   Blank Simple Project.c
   http://learn.parallax.com/propeller-c-tutorials 
 */
-#include "simpletools.h"    
-#include "abdrive.h"
- 
 #include "simpletools.h"                      // Include simpletools header
 #include "abdrive.h"                          // Include abdrive header
 #include "ping.h"
@@ -87,7 +84,29 @@ void push(Stack *S,int element)
 /*Codigo para manejo de Stacks*/
 /*--------------------------------------------------------------------------------------------------------------*/
 
+/*Codigo para movimiento del robot*/
+void izquierda(){
+  drive_goto(-25,26);     
+}
+void derecha(){
+  drive_goto(26,-25); 
+}
 
+void paso(){
+  int paso = 0;
+  while(paso<40){
+    paso = paso + 5;
+    drive_goto(5,5);
+    cont=cont+5;
+    if(ping_cm(8)<7){
+      break;
+    }
+  } 
+}  
+
+/*-----------------------------------------------------------------------------*/
+/*Funcion que revisa los lados y frente del robot para tomar datos del entorno*/
+/*-----------------------------------------------------------------------------*/
 void cheking(){
   low(26);
   low(27);
@@ -124,8 +143,9 @@ void cheking(){
     }
   
   }
-  
-/*---------Funcion que hace los push, dependiendo de lo que encuentre en el camino*/
+/*------------------------------------------------------------------------------------------*/  
+/*Funcion que hace los push, dependiendo de lo que encuentre en el camino*/
+/*-------------------------------------------------------------------------------------------*/
 void result(Stack *stackR,Stack *stackL,Stack *stackRoad){
   int resultado = 0; 
   resultado = L + R + frente; 
@@ -169,6 +189,10 @@ void result(Stack *stackR,Stack *stackL,Stack *stackRoad){
       }
   }
 
+/*----------------------------------------------------------------------------------------------*/
+/*Funcion para realizar el backtracing e ir quitando del stack los lugares por donde ya paso*/
+/*----------------------------------------------------------------------------------------------*/
+
 void backtracking(Stack *stackR, Stack *stackL, Stack *stackRoad){
   int valor = 0; 
   while(top(stackRoad)!= 0 ){
@@ -180,19 +204,39 @@ void backtracking(Stack *stackR, Stack *stackL, Stack *stackRoad){
       }
     if(top(stackRoad)==-1){
       pop(stackRoad);
-      drive_goto(26,-25);
+      derecha();
       }
     if(top(stackRoad)==-2){
       pop(stackRoad);
-      drive_goto(-25,26);
+      izquierda();
       }
     }
-  checkStacks(Stack *stackR, Stack *stackL, Stack *stackRoad);
+    checkStacks(Stack *stackR, Stack *stackL, Stack *stackRoad);
   
   }
-  
+/*------------------------------------------------------------------------------------------*/
+/*Funcion para revisar el ultimo dato de los Stacks y en base a eso, realizar una accion*/
+/*------------------------------------------------------------------------------------------*/  
 void checkStacks(Stack *stackR, Stack *stackL, Stack *stackRoad){
-  
+  if (top(stackR)==1 &&top(stackL==0)){
+    pop(stackRoad);
+    derecha();
+    push(stackRoad,-2);
+    paso(); /*PASO()*/
+    }
+  if(top(stackR)==0&&top(stackL)==1{
+    pop(stackRoad);
+    izquierda();
+    push(stackRoad,-1);
+    paso();/*PASO()*/
+    }
+  if(top(stackR)==1&&top(stackL)==1){
+    pop(stackR);
+    push(stackR,0);
+    derecha();
+    push(stackRoad,-2);
+    paso(); /*PASO()*/
+    }
   }
 
 int main() {
@@ -203,18 +247,35 @@ int main() {
   low(26);
   low(27); 
 
-
-  
-
+  Stack *stackR = createStack(100);
+  Stack *stackL = createStack(100);
+  Stack *stackRoad = createStack(100);
 
 while (1){
+  
+  
     freqout(11, 1, 38000);                      // Check left & right objects. Codigo tomado de 
     irLeft = input(10);                         //learn.parallax.com/tutorials/robot/activitybot/activitybot/navigate-infrared-flashlights/roaming-infrared-flashlights
 
     freqout(1, 1, 38000);
     irRight = input(2);
+    
+    revisar();
+    result(stackR, stackL, stackRoad);
+    
+    if(frente ==1){
+      paso();
+      }
+    else if(R == 1){
+      derecha();
+      paso();
+      }
+    else if(L==1){
+      izquierda();
+      paso();
+      }
  
-  
+  /*
     if(ping_cm(8)<7 && irLeft == 0 && irRight == 0){  //Gira en U cuando encuentra todos los caminos Bloqueados
       drive_goto(20,20);
       drive_goto(52,-50);   
@@ -235,7 +296,7 @@ while (1){
     drive_rampStep(30,30); 
       
       }
-    
+ */   
     
   } 
   
