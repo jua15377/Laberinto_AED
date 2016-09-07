@@ -112,26 +112,26 @@ void checking(){
   low(27);
   
   
-  freqout(11, 1, 38000);                      // Check left & right objects. Codigo tomado de 
+  freqout(11, 1, 68000);                      // Check left & right objects. Codigo tomado de 
   irLeft = input(10);                         //learn.parallax.com/tutorials/robot/activitybot/activitybot/navigate-infrared-flashlights/roaming-infrared-flashlights
 
-  freqout(1, 1, 38000);
+  freqout(1, 1, 68000);
   irRight = input(2);
   
   
   if(irLeft == 0){
-    L = 1;
+    L = 0;
     }
   else{
-    L = 0;
+    L = 1;
     }
     
     
   if(irRight == 0){
-    R = 1; 
+    R = 0; 
     }
   else {
-    R = 0;
+    R = 1;
     }
     
     
@@ -256,10 +256,10 @@ int main() {
 while (1){
   
   
-    freqout(11, 1, 38000);                      // Check left & right objects. Codigo tomado de 
+    freqout(11, 1, 68000);                      // Check left & right objects. Codigo tomado de 
     irLeft = input(10);                         //learn.parallax.com/tutorials/robot/activitybot/activitybot/navigate-infrared-flashlights/roaming-infrared-flashlights
 
-    freqout(1, 1, 38000);
+    freqout(1, 1, 68000);
     irRight = input(2);
     
     checking();
