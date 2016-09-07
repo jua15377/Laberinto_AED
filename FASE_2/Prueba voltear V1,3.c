@@ -95,9 +95,9 @@ void derecha(){
 void paso(){
   int paso = 0;
   while(paso<40){
-    paso = paso + 5;
-    drive_goto(5,5);
-    cont=cont+5;
+    paso = paso + 10;
+    drive_goto(10,10);
+    cont=cont+10;
     if(ping_cm(8)<7){
       break;
     }
